@@ -36,7 +36,7 @@ namespace Colors_Switch.GameObjects
             float dX = mousePosition.X - playerSprite.Position.X;
             float angle = (float)(Math.Atan2(dY, dX) * 180 / Math.PI);
 
-            playerSprite.Rotation = angle + 180;
+            playerSprite.Rotation = angle + 90;
         }
 
         public void Draw(GameLoop gameLoop)

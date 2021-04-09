@@ -41,6 +41,8 @@ namespace Colors_Switch.Scenes
         public override void Initialize()
         {
             bullets.Add(new Bullet(this));
+            bullets.Add(new Bullet(this));
+            bullets.Add(new Bullet(this));
         }
 
         public override void Update(GameTime gameTime)
@@ -48,7 +50,10 @@ namespace Colors_Switch.Scenes
             player.Rotate(Mouse.GetPosition(this.window));
 
             foreach (Bullet bullet in bullets)
-                bullet.Move(this, 50);
+            {
+                bullet.Rotate(this);
+                bullet.Move(this, 70);
+            }
         }
 
         public override void Draw(GameTime gameTime)
