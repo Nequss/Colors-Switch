@@ -40,9 +40,7 @@ namespace Colors_Switch.Scenes
 
         public override void Initialize()
         {
-            bullets.Add(new Bullet(this));
-            bullets.Add(new Bullet(this));
-            bullets.Add(new Bullet(this));
+
         }
 
         public override void Update(GameTime gameTime)

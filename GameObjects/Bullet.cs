@@ -22,9 +22,11 @@ namespace Colors_Switch.GameObjects
             bulletSprite.Texture.Smooth = true;
             bulletSprite.Origin = new Vector2f(bulletSprite.Texture.Size.X / 2, bulletSprite.Texture.Size.Y / 2);
 
-            float r = gameLoop.window.Size.X * (float)Math.Sqrt(2) / 2;
-            float x = r * (float)Math.Cos(new Random().Next(361));
-            float y = r * (float)Math.Sin(new Random().Next(361));
+
+            float angle = new Random().Next(361);
+            float r = (float)Math.Sqrt(2) * gameLoop.window.Size.X / 2;
+            float x = r * (float)Math.Cos(angle) + gameLoop.window.Size.X / 2;
+            float y = r * (float)Math.Sin(angle) + gameLoop.window.Size.Y / 2;
 
             bulletSprite.Position = new Vector2f(x, y);
         }
