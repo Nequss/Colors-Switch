@@ -53,10 +53,11 @@ namespace Colors_Switch.Scenes
             foreach (Bullet bullet in bullets)
             {
                 bullet.Rotate(this);
-                bullet.Move(this, 70);
 
-                if (CollisionTester.BoundingBoxTest(player.playerSprite, bullet.bulletSprite))
+                if (CollisionTester.PixelPerfectTest(player.playerSprite, bullet.bulletSprite, 100))
                     toRemove = bullet;
+
+                bullet.Move(this, 70);
             }
 
             if (toRemove != null)
