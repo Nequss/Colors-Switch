@@ -19,8 +19,10 @@ namespace Colors_Switch.Scenes
 
         Player player;
         Sprite backgroundSprite;
+        Clock spawnTime;
 
         List<Bullet> bullets = new List<Bullet>();
+        Bullet? toRemove = null;
 
         public MainScene() : base(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_TITLE)
         {
@@ -40,7 +42,8 @@ namespace Colors_Switch.Scenes
 
         public override void Initialize()
         {
-
+            spawnTime = new Clock();
+            bullets.Add(new Bullet(this));
         }
 
         public override void Update(GameTime gameTime)
@@ -50,7 +53,23 @@ namespace Colors_Switch.Scenes
             foreach (Bullet bullet in bullets)
             {
                 bullet.Rotate(this);
+
+                if (CollisionTester.BoundingBoxTest(player.playerSprite, bullet.bulletSprite))
+                    toRemove = bullet;
+                    
                 bullet.Move(this, 70);
+            }
+
+            if (toRemove != null)
+            {
+                bullets.Remove(toRemove);
+                toRemove = null;
+            }
+
+            if (spawnTime.ElapsedTime.AsSeconds() > 5)
+            {
+                bullets.Add(new Bullet(this));
+                spawnTime.Restart();
             }
         }
 
