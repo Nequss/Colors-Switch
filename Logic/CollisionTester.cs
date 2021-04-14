@@ -8,13 +8,6 @@ namespace Colors_Switch.Logic
 {
     public static class CollisionTester
     {
-
-        /// <summary>
-        /// Check if 2 Sprites are colliding based on the Separating Axis Theorem
-        /// </summary>
-        /// <param name="firstObj">The first Sprite object to compare</param>
-        /// <param name="secondObj">The second Sprite object to compare</param>
-        /// <returns>True if the Sprites' projections overlap</returns>
         public static bool BoundingBoxTest(Sprite firstObj, Sprite secondObj)
         {
             OrientedBoundingBox firstObb = new OrientedBoundingBox(firstObj);

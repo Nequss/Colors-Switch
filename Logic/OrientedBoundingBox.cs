@@ -8,9 +8,6 @@ namespace Colors_Switch.Logic
 {
     internal class OrientedBoundingBox
     {
-        /// <summary>
-        /// The corner points of the OrientedBoundingBox
-        /// </summary>
         public Vector2f[] Points { get; private set; }
 
         public OrientedBoundingBox(Sprite obj)
@@ -26,12 +23,6 @@ namespace Colors_Switch.Logic
                       };
         }
 
-        /// <summary>
-        /// Project the bounding box onto the specified axis coordinates
-        /// </summary>
-        /// <param name="axis">The coordinates of the axis to project to</param>
-        /// <param name="min">The smallest projection value obtained</param>
-        /// <param name="max">The largest projection value obtained</param>
         public void ProjectOntoAxis(Vector2f axis, out float min, out float max)
         {
             min = (Points[0].X * axis.X) + (Points[1].Y * axis.Y);

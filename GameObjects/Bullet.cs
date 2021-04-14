@@ -39,6 +39,7 @@ namespace Colors_Switch.GameObjects
             Vector2f newPosition = new Vector2f(bulletSprite.Position.X + x, bulletSprite.Position.Y + y);
             bulletSprite.Position = newPosition;
         }
+
         public void Rotate(GameLoop gameLoop)
         {
             float dY = gameLoop.window.Size.Y / 2 - bulletSprite.Position.Y;

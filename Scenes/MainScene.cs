@@ -53,11 +53,10 @@ namespace Colors_Switch.Scenes
             foreach (Bullet bullet in bullets)
             {
                 bullet.Rotate(this);
+                bullet.Move(this, 70);
 
                 if (CollisionTester.BoundingBoxTest(player.playerSprite, bullet.bulletSprite))
                     toRemove = bullet;
-                    
-                bullet.Move(this, 70);
             }
 
             if (toRemove != null)
@@ -66,7 +65,7 @@ namespace Colors_Switch.Scenes
                 toRemove = null;
             }
 
-            if (spawnTime.ElapsedTime.AsSeconds() > 5)
+            if (spawnTime.ElapsedTime.AsSeconds() > 2)
             {
                 bullets.Add(new Bullet(this));
                 spawnTime.Restart();
