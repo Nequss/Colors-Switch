@@ -64,8 +64,8 @@ namespace Colors_Switch.Scenes
                 {
                     score.CheckColors(CollisionTester.firstCollisionColor, CollisionTester.secondCollisionColor);
 
-                    delay -= 0.005f;
-                    bulletVelocity++;
+                    delay -= 0.05f;
+                    bulletVelocity += 2;
 
                     toRemove = bullet;
                 }
