@@ -21,7 +21,9 @@ namespace Colors_Switch.Scenes
         Score score;
         Sprite backgroundSprite;
         Clock spawnTime;
-        float delay = 6;
+
+        float delay = 3.0f;
+        int bulletVelocity = 70;
 
         List<Bullet> bullets = new List<Bullet>();
         Bullet? toRemove = null;
@@ -61,11 +63,14 @@ namespace Colors_Switch.Scenes
                 if (CollisionTester.PixelPerfectTest(player.playerSprite, bullet.bulletSprite, 200))
                 {
                     score.CheckColors(CollisionTester.firstCollisionColor, CollisionTester.secondCollisionColor);
-                    delay -= 0.05f;
+
+                    delay -= 0.005f;
+                    bulletVelocity++;
+
                     toRemove = bullet;
                 }
 
-                bullet.Move(this, 70);
+                bullet.Move(this, bulletVelocity);
             }
 
             if (toRemove != null)
