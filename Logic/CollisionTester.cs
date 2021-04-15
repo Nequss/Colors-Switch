@@ -10,6 +10,9 @@ namespace Colors_Switch.Logic
     {
         private static BitmaskManager _bitmasks = new BitmaskManager();
 
+        public static Color firstCollisionColor;
+        public static Color secondCollisionColor;
+
         public static void AddBitMask(Texture tex)
         {
             _bitmasks.Create(tex);
@@ -40,6 +43,12 @@ namespace Colors_Switch.Logic
                             if (_bitmasks.GetPixel(firstObj.Texture, (uint)(firstVector.X + firstSubRect.Left), (uint)(firstVector.Y + firstSubRect.Top)) > alphaLimit
                                 && _bitmasks.GetPixel(secondObj.Texture, (uint)(secondVector.X + secondSubRect.Left), (uint)(secondVector.Y + secondSubRect.Top)) > alphaLimit)
                             {
+                                Image firstImg = firstObj.Texture.CopyToImage();
+                                Image secondImg = secondObj.Texture.CopyToImage();
+
+                                firstCollisionColor = firstImg.GetPixel((uint)(firstVector.X + firstSubRect.Left), (uint)(firstVector.Y + firstSubRect.Top));
+                                secondCollisionColor = secondImg.GetPixel((uint)(secondVector.X + secondSubRect.Left), (uint)(secondVector.Y + secondSubRect.Top));
+
                                 return true;
                             }
                         }

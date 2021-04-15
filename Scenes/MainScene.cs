@@ -18,6 +18,7 @@ namespace Colors_Switch.Scenes
         public const string DEFAULT_WINDOW_BACKGROUND = "./assets/background.png";
 
         Player player;
+        Score score;
         Sprite backgroundSprite;
         Clock spawnTime;
 
@@ -31,13 +32,17 @@ namespace Colors_Switch.Scenes
 
         public override void LoadContent()
         {
+
+            backgroundSprite = new Sprite();
+            backgroundSprite.Texture = new Texture(DEFAULT_WINDOW_BACKGROUND);
+
             DebugInfo.LoadContent();
 
             player = new Player();
             player.LoadContent(this);
 
-            backgroundSprite = new Sprite();
-            backgroundSprite.Texture = new Texture(DEFAULT_WINDOW_BACKGROUND);
+            score = new Score();
+            score.LoadContent();
         }
 
         public override void Initialize()
@@ -54,8 +59,12 @@ namespace Colors_Switch.Scenes
             {
                 bullet.Rotate(this);
 
-                if (CollisionTester.PixelPerfectTest(player.playerSprite, bullet.bulletSprite, 100))
+                if (CollisionTester.PixelPerfectTest(player.playerSprite, bullet.bulletSprite, 200))
+                {
+                    score.CheckColors(CollisionTester.firstCollisionColor, CollisionTester.secondCollisionColor);
+
                     toRemove = bullet;
+                }
 
                 bullet.Move(this, 70);
             }
@@ -80,6 +89,8 @@ namespace Colors_Switch.Scenes
 
             foreach (Bullet bullet in bullets)
                 bullet.Draw(this);
+
+            score.DrawScore(this);
 
             DebugInfo.DrawPerformaceData(this, Color.White);
         }
