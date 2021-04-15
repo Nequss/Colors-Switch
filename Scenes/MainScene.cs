@@ -12,8 +12,8 @@ namespace Colors_Switch.Scenes
 {
     public class MainScene : GameLoop
     {
-        public const uint   DEFAULT_WINDOW_WIDTH  = 800;
-        public const uint   DEFAULT_WINDOW_HEIGHT = 800;
+        public const uint   DEFAULT_WINDOW_WIDTH  = 1000;
+        public const uint   DEFAULT_WINDOW_HEIGHT = 1000;
         public const string DEFAULT_WINDOW_TITLE  = "SCENE 1";
         public const string DEFAULT_WINDOW_BACKGROUND = "./assets/background.png";
 
@@ -21,6 +21,7 @@ namespace Colors_Switch.Scenes
         Score score;
         Sprite backgroundSprite;
         Clock spawnTime;
+        float delay = 6;
 
         List<Bullet> bullets = new List<Bullet>();
         Bullet? toRemove = null;
@@ -32,7 +33,6 @@ namespace Colors_Switch.Scenes
 
         public override void LoadContent()
         {
-
             backgroundSprite = new Sprite();
             backgroundSprite.Texture = new Texture(DEFAULT_WINDOW_BACKGROUND);
 
@@ -48,7 +48,6 @@ namespace Colors_Switch.Scenes
         public override void Initialize()
         {
             spawnTime = new Clock();
-            bullets.Add(new Bullet(this));
         }
 
         public override void Update(GameTime gameTime)
@@ -62,7 +61,7 @@ namespace Colors_Switch.Scenes
                 if (CollisionTester.PixelPerfectTest(player.playerSprite, bullet.bulletSprite, 200))
                 {
                     score.CheckColors(CollisionTester.firstCollisionColor, CollisionTester.secondCollisionColor);
-
+                    delay -= 0.05f;
                     toRemove = bullet;
                 }
 
@@ -75,7 +74,7 @@ namespace Colors_Switch.Scenes
                 toRemove = null;
             }
 
-            if (spawnTime.ElapsedTime.AsSeconds() > 2)
+            if (spawnTime.ElapsedTime.AsSeconds() > delay)
             {
                 bullets.Add(new Bullet(this));
                 spawnTime.Restart();
@@ -92,7 +91,7 @@ namespace Colors_Switch.Scenes
 
             score.DrawScore(this);
 
-            DebugInfo.DrawPerformaceData(this, Color.White);
+            DebugInfo.DrawPerformaceData(this, Color.White, delay);
         }
     }
 }

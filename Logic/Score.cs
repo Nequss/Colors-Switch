@@ -43,8 +43,8 @@ namespace Colors_Switch.Logic
 
             Text scoreText = new Text(score.ToString(), scoreFont, 50);
 
-            float x = gameLoop.window.Size.X - 100;
-            float y = 100;
+            float x = gameLoop.window.Size.X - 50;
+            float y = 10;
 
             scoreText.Position = new Vector2f(x, y);
             scoreText.FillColor = Color.White;

@@ -28,7 +28,7 @@ namespace Colors_Switch.Logic
         protected GameLoop(uint windowWidth, uint windowHeight, string windowTitle)
         {
 
-            window = new RenderWindow(new VideoMode(windowWidth, windowHeight), windowTitle);
+            window = new RenderWindow(new VideoMode(windowWidth, windowHeight), windowTitle, Styles.Close);
             gameTime = new GameTime();
 
             window.Closed += WindowClosed;
