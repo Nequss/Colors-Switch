@@ -20,7 +20,7 @@ namespace Colors_Switch.Logic
             consoleFont = new Font(DEBUG_FONT_PATH);
         }
 
-        public static void DrawPerformaceData(GameLoop gameLoop, Color fontColor, float delay)
+        public static void DrawPerformaceData(GameLoop gameLoop, Color fontColor, float delay, int velocity)
         {
             if (consoleFont == null)
                 return;
@@ -46,10 +46,15 @@ namespace Colors_Switch.Logic
             text4.Position = new Vector2f(4f, 68f);
             text4.FillColor = fontColor;
 
+            Text text5 = new Text(velocity.ToString(), consoleFont, 14);
+            text5.Position = new Vector2f(4f, 88f);
+            text5.FillColor = fontColor;
+
             gameLoop.window.Draw(text1);
             gameLoop.window.Draw(text2);
             gameLoop.window.Draw(text3);
-            gameLoop.window.Draw(text3);
+            gameLoop.window.Draw(text4);
+            gameLoop.window.Draw(text5);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace Colors_Switch.GameObjects
         public const string PLAYER_SQUARE_PATH = "./assets/square.png";
 
         public Sprite playerSprite;
-
         public Player()
         {
 

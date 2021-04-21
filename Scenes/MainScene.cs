@@ -14,7 +14,7 @@ namespace Colors_Switch.Scenes
     {
         public const uint   DEFAULT_WINDOW_WIDTH  = 1000;
         public const uint   DEFAULT_WINDOW_HEIGHT = 1000;
-        public const string DEFAULT_WINDOW_TITLE  = "SCENE 1";
+        public const string DEFAULT_WINDOW_TITLE  = "Colors Switch";
         public const string DEFAULT_WINDOW_BACKGROUND = "./assets/background.png";
 
         Player player;
@@ -22,8 +22,8 @@ namespace Colors_Switch.Scenes
         Sprite backgroundSprite;
         Clock spawnTime;
 
-        float delay = 3.0f;
-        int bulletVelocity = 70;
+        float delay = 3.5f;
+        int bulletVelocity = 90;
 
         List<Bullet> bullets = new List<Bullet>();
         Bullet? toRemove = null;
@@ -44,7 +44,7 @@ namespace Colors_Switch.Scenes
             player.LoadContent(this);
 
             score = new Score();
-            score.LoadContent();
+            score.LoadContent(this);
         }
 
         public override void Initialize()
@@ -55,6 +55,7 @@ namespace Colors_Switch.Scenes
         public override void Update(GameTime gameTime)
         {
             player.Rotate(Mouse.GetPosition(this.window));
+            score.Rotate(Mouse.GetPosition(this.window));
 
             foreach (Bullet bullet in bullets)
             {
@@ -62,10 +63,16 @@ namespace Colors_Switch.Scenes
 
                 if (CollisionTester.PixelPerfectTest(player.playerSprite, bullet.bulletSprite, 200))
                 {
-                    score.CheckColors(CollisionTester.firstCollisionColor, CollisionTester.secondCollisionColor);
-
-                    delay -= 0.05f;
-                    bulletVelocity += 2;
+                    if (score.CheckColors(CollisionTester.firstCollisionColor, CollisionTester.secondCollisionColor))
+                    {
+                        delay -= 0.025f;
+                        bulletVelocity += 2;
+                    }
+                    else
+                    {
+                        delay = 5.0f;
+                        bulletVelocity = 70;
+                    }
 
                     toRemove = bullet;
                 }
@@ -89,14 +96,13 @@ namespace Colors_Switch.Scenes
         public override void Draw(GameTime gameTime)
         {
             this.window.Draw(backgroundSprite);
+            score.DrawScore(this);
             player.Draw(this);
 
             foreach (Bullet bullet in bullets)
                 bullet.Draw(this);
 
-            score.DrawScore(this);
-
-            DebugInfo.DrawPerformaceData(this, Color.White, delay);
+            DebugInfo.DrawPerformaceData(this, Color.White, delay, bulletVelocity);
         }
     }
 }

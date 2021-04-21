@@ -11,29 +11,51 @@ namespace Colors_Switch.Logic
 {
     public class Score
     {
-        const string SCORE_FONT_PATH = "./cour.ttf";
+        const string SCORE_FONT_PATH = "./font.ttf";
 
         private Font scoreFont;
-        private int score;
+        private int score = 0;
+        Text scoreText;
 
         public Score()
         {
             
         }
 
-        public void LoadContent()
+        public void LoadContent(GameLoop gameLoop)
         {
             scoreFont = new Font(SCORE_FONT_PATH);
+            scoreText = new Text(score.ToString(), scoreFont, 80);
+            scoreText.Origin = new Vector2f(scoreText.CharacterSize / 2, scoreText.CharacterSize / 2 + 7);
+            scoreText.Position = new Vector2f(gameLoop.window.Size.X / 2, gameLoop.window.Size.Y / 2);
+            scoreText.FillColor = Color.White;
         }
 
-        public void CheckColors(Color first, Color second)
+        public bool CheckColors(Color first, Color second)
         {
             int dR = Math.Abs(first.R - second.R);
             int dG = Math.Abs(first.G - second.G);
             int dB = Math.Abs(first.B - second.B);
 
             if ((dR + dG + dB) < 30)
+            {
                 score++;
+                return true;
+            }
+            else
+            {
+                score = 0;
+                return false;
+            }
+        }
+
+        public void Rotate(Vector2i mousePosition)
+        {
+            float dY = mousePosition.Y - scoreText.Position.Y;
+            float dX = mousePosition.X - scoreText.Position.X;
+            float angle = (float)(Math.Atan2(dY, dX) * 180 / Math.PI);
+
+            scoreText.Rotation = angle + 90;
         }
 
         public void DrawScore(GameLoop gameLoop)
@@ -41,13 +63,13 @@ namespace Colors_Switch.Logic
             if (scoreFont == null)
                 return;
 
-            Text scoreText = new Text(score.ToString(), scoreFont, 50);
+            scoreText.DisplayedString = score.ToString();
 
-            float x = gameLoop.window.Size.X - 50;
-            float y = 10;
-
-            scoreText.Position = new Vector2f(x, y);
-            scoreText.FillColor = Color.White;
+            if(score >= 10)
+            {
+                scoreText.CharacterSize = 50;
+                scoreText.Origin = new Vector2f(scoreText.CharacterSize / 2 + 25, scoreText.CharacterSize / 2 + 7);
+            }
 
             gameLoop.window.Draw(scoreText);
         }
