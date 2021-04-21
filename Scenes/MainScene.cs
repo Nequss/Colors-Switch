@@ -21,7 +21,8 @@ namespace Colors_Switch.Scenes
         Score score;
         Sprite backgroundSprite;
         Clock spawnTime;
-
+        Menu menu;
+        
         float delay = 3.5f;
         int bulletVelocity = 90;
 
@@ -45,6 +46,9 @@ namespace Colors_Switch.Scenes
 
             score = new Score();
             score.LoadContent(this);
+
+            menu = new Menu();
+            menu.LoadContent(this);
         }
 
         public override void Initialize()
@@ -54,8 +58,8 @@ namespace Colors_Switch.Scenes
 
         public override void Update(GameTime gameTime)
         {
-            player.Rotate(Mouse.GetPosition(this.window));
-            score.Rotate(Mouse.GetPosition(this.window));
+            player.Rotate(Mouse.GetPosition(this.window), gameTime);
+            score.Rotate(Mouse.GetPosition(this.window), gameTime);
 
             foreach (Bullet bullet in bullets)
             {
@@ -65,6 +69,9 @@ namespace Colors_Switch.Scenes
                 {
                     if (score.CheckColors(CollisionTester.firstCollisionColor, CollisionTester.secondCollisionColor))
                     {
+
+                        menu.UpdateScoreText(score.score);
+
                         delay -= 0.025f;
                         bulletVelocity += 2;
                     }
@@ -86,21 +93,36 @@ namespace Colors_Switch.Scenes
                 toRemove = null;
             }
 
-            if (spawnTime.ElapsedTime.AsSeconds() > delay)
+            if (gameTime.timeScale == 1)
             {
-                bullets.Add(new Bullet(this));
-                spawnTime.Restart();
+                if (spawnTime.ElapsedTime.AsSeconds() > delay)
+                {
+                    bullets.Add(new Bullet(this));
+                    spawnTime.Restart();
+                }
+            }
+            else
+            {
+                menu.CheckHovers(Mouse.GetPosition(this.window));
             }
         }
 
         public override void Draw(GameTime gameTime)
         {
             this.window.Draw(backgroundSprite);
-            score.DrawScore(this);
-            player.Draw(this);
 
-            foreach (Bullet bullet in bullets)
-                bullet.Draw(this);
+            if (gameTime.timeScale == 1)
+            {
+                score.DrawScore(this);
+                player.Draw(this);
+
+                foreach (Bullet bullet in bullets)
+                    bullet.Draw(this);
+            }
+            else
+            {
+                menu.Draw(this);
+            }
 
             DebugInfo.DrawPerformaceData(this, Color.White, delay, bulletVelocity);
         }

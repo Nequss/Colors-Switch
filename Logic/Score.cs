@@ -14,7 +14,7 @@ namespace Colors_Switch.Logic
         const string SCORE_FONT_PATH = "./font.ttf";
 
         private Font scoreFont;
-        private int score = 0;
+        public int score = 0;
         Text scoreText;
 
         public Score()
@@ -49,7 +49,7 @@ namespace Colors_Switch.Logic
             }
         }
 
-        public void Rotate(Vector2i mousePosition)
+        public void Rotate(Vector2i mousePosition, GameTime gameTime)
         {
             float dY = mousePosition.Y - scoreText.Position.Y;
             float dX = mousePosition.X - scoreText.Position.X;

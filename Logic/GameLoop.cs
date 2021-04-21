@@ -31,6 +31,30 @@ namespace Colors_Switch.Logic
             gameTime = new GameTime();
 
             window.Closed += WindowClosed;
+            window.KeyReleased += WindowKeyReleased;
+            window.MouseButtonReleased += WindowMouseButtonReleased;
+        }
+
+        private void WindowMouseButtonReleased(object sender, MouseButtonEventArgs e)
+        {
+            if (gameTime.timeScale == 0)
+            {
+                switch (e.Button)
+                {
+                    case Mouse.Button.Left:
+                        break;
+                }
+            }
+        }
+
+        private void WindowKeyReleased(object sender, KeyEventArgs e)
+        {
+            switch (e.Code)
+            {
+                case Keyboard.Key.Escape:
+                    gameTime.timeScale = gameTime.timeScale == 1 ? 0 : 1;
+                    break;
+            }
         }
 
         private void WindowClosed(object sender, EventArgs e)

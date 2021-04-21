@@ -28,8 +28,7 @@ namespace Colors_Switch.GameObjects
             playerSprite.Position = new Vector2f(gameLoop.window.Size.X / 2, gameLoop.window.Size.Y / 2);
         }
 
-
-        public void Rotate(Vector2i mousePosition)
+        public void Rotate(Vector2i mousePosition, GameTime gameTime)
         {
             float dY = mousePosition.Y - playerSprite.Position.Y;
             float dX = mousePosition.X - playerSprite.Position.X;
