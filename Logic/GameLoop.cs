@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SFML.Audio;
-using SFML.Graphics;
-using SFML.Window;
+﻿using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
+using System;
 
 namespace Colors_Switch.Logic
 {
@@ -13,13 +10,13 @@ namespace Colors_Switch.Logic
         public const int TARGET_FPS = 60;
         public const float TIME_UNTIL_UPDATE = 1f / TARGET_FPS;
 
-        public RenderWindow window 
-        { 
-            get; 
-            protected set; 
+        public RenderWindow window
+        {
+            get;
+            protected set;
         }
 
-        public GameTime gameTime 
+        public GameTime gameTime
         {
             get;
             protected set;
@@ -85,7 +82,7 @@ namespace Colors_Switch.Logic
 
                 totalTimeBeforeUpdate += deltaTime;
 
-                if(totalTimeBeforeUpdate >= TIME_UNTIL_UPDATE)
+                if (totalTimeBeforeUpdate >= TIME_UNTIL_UPDATE)
                 {
                     gameTime.Update(totalTimeBeforeUpdate, clock.ElapsedTime.AsSeconds());
                     totalTimeBeforeUpdate = 0;
@@ -102,8 +99,11 @@ namespace Colors_Switch.Logic
         public abstract void MenuClick(Vector2i mousePosition);
 
         public abstract void LoadContent();
+
         public abstract void Initialize();
+
         public abstract void Update(GameTime gameTime);
+
         public abstract void Draw(GameTime gameTime);
     }
 }

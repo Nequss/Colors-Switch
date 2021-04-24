@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SFML.Audio;
-using SFML.Graphics;
-using SFML.Window;
+﻿using SFML.Graphics;
 using SFML.System;
-using System.IO;
+using System;
 
 namespace Colors_Switch.Logic
 {
     public class Score
     {
-        const string SCORE_FONT_PATH = "./font.ttf";
+        private const string SCORE_FONT_PATH = "./font.ttf";
 
         private Font scoreFont;
         public int score = 0;
-        Text scoreText;
+        private Text scoreText;
 
         public Score()
         {
-            
         }
 
         public void LoadContent(GameLoop gameLoop)
@@ -65,7 +59,7 @@ namespace Colors_Switch.Logic
 
             scoreText.DisplayedString = score.ToString();
 
-            if(score >= 10)
+            if (score >= 10)
             {
                 scoreText.CharacterSize = 50;
                 scoreText.Origin = new Vector2f(scoreText.CharacterSize / 2 + 25, scoreText.CharacterSize / 2 + 7);

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SFML.Audio;
+﻿using Colors_Switch.Logic;
 using SFML.Graphics;
-using SFML.Window;
 using SFML.System;
-using Colors_Switch.Logic;
+using System;
 
 namespace Colors_Switch.GameObjects
 {
@@ -14,9 +10,9 @@ namespace Colors_Switch.GameObjects
         public const string PLAYER_SQUARE_PATH = "./assets/square.png";
 
         public Sprite playerSprite;
+
         public Player()
         {
-
         }
 
         public void LoadContent(GameLoop gameLoop)

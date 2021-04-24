@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SFML.Audio;
+﻿using Colors_Switch.Logic;
 using SFML.Graphics;
-using SFML.Window;
 using SFML.System;
-using Colors_Switch.Logic;
+using System;
 
 namespace Colors_Switch.GameObjects
 {
     public class Menu
     {
         public const string MENU_PATH = "./assets/box.png";
-        const string MENU_FONT_PATH = "./font.ttf";
+        private const string MENU_FONT_PATH = "./font.ttf";
 
         private Font menuFont;
 
@@ -101,7 +97,7 @@ namespace Colors_Switch.GameObjects
             scoreText.Origin = new Vector2f(scoreText.CharacterSize * scoreText.DisplayedString.Length / 2, scoreText.CharacterSize / 2 + 7);
 
             int s = Int32.Parse(scoreText.DisplayedString);
-            
+
             scoreText.DisplayedString = s > score ? s.ToString() : score.ToString();
         }
 

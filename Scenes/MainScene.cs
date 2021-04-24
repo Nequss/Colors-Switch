@@ -1,37 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SFML.Audio;
-using SFML.Graphics;
-using SFML.Window;
-using SFML.System;
+﻿using Colors_Switch.GameObjects;
 using Colors_Switch.Logic;
-using Colors_Switch.GameObjects;
+using SFML.Graphics;
+using SFML.System;
+using SFML.Window;
+using System.Collections.Generic;
 
 namespace Colors_Switch.Scenes
 {
     public class MainScene : GameLoop
     {
-        public const uint   DEFAULT_WINDOW_WIDTH  = 1000;
-        public const uint   DEFAULT_WINDOW_HEIGHT = 1000;
-        public const string DEFAULT_WINDOW_TITLE  = "Colors Switch";
+        public const uint DEFAULT_WINDOW_WIDTH = 1000;
+        public const uint DEFAULT_WINDOW_HEIGHT = 1000;
+        public const string DEFAULT_WINDOW_TITLE = "Colors Switch";
         public const string DEFAULT_WINDOW_BACKGROUND = "./assets/background.png";
 
-        Player player;
-        Score score;
-        Sprite backgroundSprite;
-        Clock spawnTime;
-        Menu menu;
-        
-        float delay = 3.5f;
-        int bulletVelocity = 90;
+        private Player player;
+        private Score score;
+        private Sprite backgroundSprite;
+        private Clock spawnTime;
+        private Menu menu;
 
-        List<Bullet> bullets = new List<Bullet>();
-        Bullet? toRemove = null;
+        private float delay = 3.5f;
+        private int bulletVelocity = 90;
+
+        private List<Bullet> bullets = new List<Bullet>();
+        private Bullet? toRemove = null;
 
         public MainScene() : base(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_TITLE)
         {
-
         }
 
         public override void LoadContent()
