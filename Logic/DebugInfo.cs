@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SFML.Audio;
-using SFML.Graphics;
-using SFML.Window;
+﻿using SFML.Graphics;
 using SFML.System;
-using System.IO;
 
 namespace Colors_Switch.Logic
 {
@@ -14,7 +8,7 @@ namespace Colors_Switch.Logic
         public const string DEBUG_FONT_PATH = "./cour.ttf";
 
         public static Font consoleFont;
-        
+
         public static void LoadContent()
         {
             consoleFont = new Font(DEBUG_FONT_PATH);

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Colors_Switch.Logic
+﻿namespace Colors_Switch.Logic
 {
     public class GameTime
     {
         private float _deltaTime = 0f;
         private float _timeScale = 0f;
+
+        public GameTime()
+        {
+        }
 
         public float deltaTime
         {
@@ -26,17 +26,11 @@ namespace Colors_Switch.Logic
             set { _timeScale = value; }
         }
 
-        public float totalTimeElapsed 
+        public float totalTimeElapsed
         {
             get;
             protected set;
         }
-
-        public GameTime()
-        {
-
-        }
-
         public void Update(float deltaTime, float totalTimeElapsed)
         {
             _deltaTime = deltaTime;

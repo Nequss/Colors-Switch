@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SFML.Audio;
+﻿using Colors_Switch.Logic;
 using SFML.Graphics;
-using SFML.Window;
 using SFML.System;
-using Colors_Switch.Logic;
+using System;
 
 namespace Colors_Switch.GameObjects
 {
     public class Bullet
     {
         private readonly string[] BULLET_PATHS = { "./assets/red.png", "./assets/yellow.png", "./assets/green.png", "./assets/blue.png", };
-        
+
         public Sprite bulletSprite;
 
         public Bullet(GameLoop gameLoop)
@@ -21,7 +17,6 @@ namespace Colors_Switch.GameObjects
             bulletSprite.Texture = new Texture(BULLET_PATHS[new Random().Next(4)]);
             bulletSprite.Texture.Smooth = true;
             bulletSprite.Origin = new Vector2f(bulletSprite.Texture.Size.X / 2, bulletSprite.Texture.Size.Y / 2);
-
 
             float angle = new Random().Next(361);
             float r = (float)Math.Sqrt(2) * gameLoop.window.Size.X / 2;
