@@ -42,6 +42,7 @@ namespace Colors_Switch.Logic
                 switch (e.Button)
                 {
                     case Mouse.Button.Left:
+                        MenuClick(Mouse.GetPosition(window));
                         break;
                 }
             }
@@ -97,6 +98,8 @@ namespace Colors_Switch.Logic
                 }
             }
         }
+
+        public abstract void MenuClick(Vector2i mousePosition);
 
         public abstract void LoadContent();
         public abstract void Initialize();

@@ -69,16 +69,17 @@ namespace Colors_Switch.Scenes
                 {
                     if (score.CheckColors(CollisionTester.firstCollisionColor, CollisionTester.secondCollisionColor))
                     {
-
                         menu.UpdateScoreText(score.score);
 
-                        delay -= 0.025f;
-                        bulletVelocity += 2;
+                        if (delay >= 0.8f)
+                            delay -= 0.05f;
+
+                        bulletVelocity += 3;
                     }
                     else
                     {
-                        delay = 5.0f;
-                        bulletVelocity = 70;
+                        delay = 3.5f;
+                        bulletVelocity = 90;
                     }
 
                     toRemove = bullet;
@@ -125,6 +126,11 @@ namespace Colors_Switch.Scenes
             }
 
             DebugInfo.DrawPerformaceData(this, Color.White, delay, bulletVelocity);
+        }
+
+        public override void MenuClick(Vector2i mousePosition)
+        {
+            menu.MenuClick(this, mousePosition);
         }
     }
 }

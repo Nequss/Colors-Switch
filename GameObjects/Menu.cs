@@ -53,7 +53,7 @@ namespace Colors_Switch.GameObjects
             scoreText.Position = new Vector2f(gameLoop.window.Size.X / 2, gameLoop.window.Size.Y / 2 - 50);
             scoreText.FillColor = Color.White;
 
-            playText = new Text("Play again", menuFont, 50);
+            playText = new Text("Play", menuFont, 50);
             playText.Origin = new Vector2f(playText.CharacterSize * playText.DisplayedString.Length / 2, playText.CharacterSize / 2 + 7);
             playText.Position = new Vector2f(gameLoop.window.Size.X / 2, gameLoop.window.Size.Y / 2 + 50);
             playText.FillColor = Color.White;
@@ -62,6 +62,15 @@ namespace Colors_Switch.GameObjects
             exitText.Origin = new Vector2f(exitText.CharacterSize * exitText.DisplayedString.Length / 2, exitText.CharacterSize / 2 + 7);
             exitText.Position = new Vector2f(gameLoop.window.Size.X / 2, gameLoop.window.Size.Y / 2 + 150);
             exitText.FillColor = Color.White;
+        }
+
+        public void MenuClick(GameLoop gameLoop, Vector2i mousePosition)
+        {
+            if (playText.GetGlobalBounds().Contains(mousePosition.X, mousePosition.Y))
+                gameLoop.gameTime.timeScale = 1;
+
+            if (exitText.GetGlobalBounds().Contains(mousePosition.X, mousePosition.Y))
+                gameLoop.window.Close();
         }
 
         public void CheckHovers(Vector2i mousePosition)
@@ -90,7 +99,10 @@ namespace Colors_Switch.GameObjects
         public void UpdateScoreText(int score)
         {
             scoreText.Origin = new Vector2f(scoreText.CharacterSize * scoreText.DisplayedString.Length / 2, scoreText.CharacterSize / 2 + 7);
-            scoreText.DisplayedString = score.ToString();
+
+            int s = Int32.Parse(scoreText.DisplayedString);
+            
+            scoreText.DisplayedString = s > score ? s.ToString() : score.ToString();
         }
 
         public void Draw(GameLoop gameLoop)

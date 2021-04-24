@@ -70,6 +70,11 @@ namespace Colors_Switch.Logic
                 scoreText.CharacterSize = 50;
                 scoreText.Origin = new Vector2f(scoreText.CharacterSize / 2 + 25, scoreText.CharacterSize / 2 + 7);
             }
+            else
+            {
+                scoreText.CharacterSize = 80;
+                scoreText.Origin = new Vector2f(scoreText.CharacterSize / 2, scoreText.CharacterSize / 2 + 7);
+            }
 
             gameLoop.window.Draw(scoreText);
         }

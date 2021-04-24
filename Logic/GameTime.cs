@@ -7,7 +7,7 @@ namespace Colors_Switch.Logic
     public class GameTime
     {
         private float _deltaTime = 0f;
-        private float _timeScale = 1f;
+        private float _timeScale = 0f;
 
         public float deltaTime
         {
